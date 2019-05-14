@@ -12,7 +12,7 @@ var factorial = function(n) {
   } else if (n<0) {
     return null;
    } else {
-    return n * factorial (n-1)
+    return n * factorial (n-1);
   }
 };
 
@@ -95,7 +95,8 @@ var exponent = function(base, exp) {
   } else if (exp >0) {
     return base * (exponent(base, exp-1));
   } else if (exp<0) {
-    return (1 / base * exponent(base, exp+1)).toFixed(4);
+    var num = (1 / base * exponent(base, exp+1)).toFixed(5);
+    return parseFloat(num);
   }
 };
 
@@ -136,11 +137,22 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
-};
+  };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
 var multiply = function(x, y) {
+  if (x === 0 || y === 0) {
+    return 0;
+  } else if (x === 1) {
+    return y;
+  } else if (y === 1) {
+    return x;
+  } else if (x>0 && y>0) {
+    return y + multiply(x-1,y);
+  } else if (x<0 || y<0) {
+    return 'foo';
+  }
 };
 
 // 13. Write a function that divides two numbers without using the / operator or
@@ -166,18 +178,30 @@ var compareStr = function(str1, str2) {
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
 var createArray = function(str) {
-  
-
 };
 
 // 17. Reverse the order of an array
 var reverseArr = function(array) {
+  if (array.length === 0) {
+    return [];
+  } else if (array.length === 1) {
+    return array;
+  } else {
+    return array.slice(-1).concat(reverseArr(array.slice(0,array.length-1)));
+  };
 };
 
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function(value, length) {
+  if (length === 0) {
+    return [];
+  } else if (length === 1) {
+    return [value];
+  } else {
+    return [value].concat(buildList(value,length-1));
+  }
 };
 
 // 19. Implement FizzBuzz. Given integer n, return an array of the string representations of 1 to n.
@@ -186,6 +210,17 @@ var buildList = function(value, length) {
 // For numbers which are multiples of both three and five, output “FizzBuzz” instead of the number.
 // fizzBuzz(5) // ['1','2','Fizz','4','Buzz']
 var fizzBuzz = function(n) {
+  if (n === 0) {
+    return [];
+  } if (n % 3 === 0 && n % 5 === 0) {
+    return ['FizzBuzz'].concat(fizzBuzz(n-1));
+  } else if (n % 3 === 0) {
+    return ['Fizz'].concat(fizzBuzz(n-1));
+  } else if (n % 5 === 0) {
+    return ['Buzz'].concat(fizzBuzz(n-1));
+  } else {
+    return [n.toString()].concat(fizzBuzz(n-1));
+  }
 };
 
 // 20. Count the occurence of a value in a list.
@@ -255,6 +290,15 @@ var capitalizeFirst = function(array) {
 // };
 // nestedEvenSum(obj1); // 10
 var nestedEvenSum = function(obj) {
+   var sum = 0;
+   for (key in obj) {
+    if (typeof obj[key] === 'object') {
+      sum = sum + nestedEvenSum(obj[key]);
+    } else if (obj[key] % 2 === 0) {
+      sum = sum + obj[key];
+    }
+   }
+   return sum;
 };
 
 // 30. Flatten an array containing nested arrays.
