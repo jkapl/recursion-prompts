@@ -48,6 +48,18 @@ var arraySum = function(array) {
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  if (n === 0) {
+    return true
+  } if (n === 1) {
+    return false
+  } else {
+  if (n>1) {
+    return isEven(n-2)
+  } 
+  if (n<0) {
+  return isEven(n+2);
+  }
+  }
 };
 
 // 5. Sum all integers below a given integer.
@@ -105,6 +117,12 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  if (n===1) {
+    return true
+  } if (n<1) {
+    return false
+  }
+  return powerOfTwo(n/2);
 };
 
 // 9. Write a function that reverses a string.
@@ -120,15 +138,15 @@ var reverse = function(string) {
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
-  string = string.toLowerCase();
-  if (string.length === 1) {
-    return true;
-  } else {
-    if (string[0] === string[string.length-1]) {
-      return palindrome(string.slice(1, -1))
-    }
-    return false;
-  }
+  // string = string.toLowerCase();
+  // if (string.length === 2 && string.slice(0,1)) {
+  //   return true;
+  // } else {
+  //   if (string[0] === string[string.length-1]) {
+  //     return palindrome(string.slice(1, -1))
+  //   }
+  //   return false;
+  // }
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -136,8 +154,19 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
+// modulo(5,-2)
 var modulo = function(x, y) {
-  };
+  // if (x<0 || y<0) {
+    
+  // }
+  if (x-y === 0) {
+    return 0
+  }
+  if (x<y) {
+    return x
+  }
+  return modulo(x-y,y);
+};
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
